@@ -1,4 +1,4 @@
-%define rev r49
+%define rev r78
 
 #Module-Specific definitions
 %define mod_name mod_auth_openid
@@ -7,12 +7,12 @@
 
 Summary:	An OpenID authentication module for Apache 2
 Name:		apache-%{mod_name}
-Version:	0.0
-Release:	%mkrel 0.%{rev}.2
+Version:	0.1
+Release:	%mkrel 0.%{rev}.1
 Group:		System/Servers
-License:	GPL
+License:	MIT
 URL:		http://www.butterfat.net/wiki/Projects/ModAuthOpenID
-Source:		%{mod_name}-%{version}-%{rev}.tar.bz2
+Source:		%{mod_name}-%{version}-%{rev}.tar.gz
 Source1:	%{mod_conf}
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
@@ -26,9 +26,9 @@ BuildRequires:	pkgconfig
 BuildRequires:	autoconf2.5
 BuildRequires:	automake1.8
 BuildRequires:	libtool
-BuildRequires:	libkonforka-devel >= 0.0.1
-BuildRequires:	libpcre++-devel >= 0.9.5
-BuildRequires:	libopkele-devel >= 0.1
+BuildRequires:	konforka-devel >= 0.3
+BuildRequires:	pcre++-devel >= 0.9.5
+BuildRequires:	opkele-devel >= 0.1
 BuildRequires:	db4-devel
 BuildRequires:	pqxx-devel
 BuildRequires:	curl-devel
@@ -51,11 +51,13 @@ number of other options.
 cp %{SOURCE1} %{mod_conf}
 
 # bdb header hack
-perl -pi -e "s|db_cxx\.h|db4/db_cxx\.h|g" configure* *.h acinclude.d/ax_path_bdb.m4
+perl -pi -e "s|db_cxx\.h|db4/db_cxx\.h|g" configure* *.h acinclude.d/ax_path_bdb.m4 storage/storage.h
 
 %build
+%serverbuild
+
 rm -rf configure autom4te.cache
-libtoolize --copy --force; aclocal-1.8 -I acinclude.d; autoheader; automake-1.8 --add-missing --copy; autoconf
+libtoolize --copy --force; aclocal -I acinclude.d; autoheader; automake --add-missing --copy; autoconf
 
 %configure2_5x \
     --with-apxs=%{_sbindir}/apxs \
@@ -93,10 +95,8 @@ fi
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING INSTALL LICENSE TODO
+%doc AUTHORS COPYING ChangeLog NEWS README TODO
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/httpd/modules.d/%{mod_conf}
 %attr(0755,root,root) %{_libdir}/apache-extramodules/%{mod_so}
 %attr(0755,root,root) %{_sbindir}/%{mod_name}-db_info
 %attr(0755,apache,apache) %dir %{_localstatedir}/%{mod_name}
-
-
