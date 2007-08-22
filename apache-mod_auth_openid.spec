@@ -26,7 +26,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	autoconf2.5
 BuildRequires:	automake1.8
 BuildRequires:	libtool
-BuildRequires:	konforka-devel >= 0.3
+BuildRequires:	konforka-devel >= 0.0.1
 BuildRequires:	pcre++-devel >= 0.9.5
 BuildRequires:	opkele-devel >= 0.1
 BuildRequires:	db4-devel
