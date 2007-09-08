@@ -8,7 +8,7 @@
 Summary:	An OpenID authentication module for Apache 2
 Name:		apache-%{mod_name}
 Version:	0.1
-Release:	%mkrel 0.%{rev}.2
+Release:	%mkrel 0.%{rev}.3
 Group:		System/Servers
 License:	MIT
 URL:		http://www.butterfat.net/wiki/Projects/ModAuthOpenID
