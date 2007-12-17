@@ -35,7 +35,6 @@ BuildRequires:	db4-devel
 BuildRequires:	pqxx-devel
 BuildRequires:	curl-devel
 BuildRequires:	pcre-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 mod_auth_openid is an authentication module for the Apache 2 Web server. It
