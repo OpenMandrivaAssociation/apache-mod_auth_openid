@@ -8,7 +8,7 @@
 Summary:	An OpenID authentication module for Apache 2
 Name:		apache-%{mod_name}
 Version:	0.1
-Release:	%mkrel 0.%{rev}.1
+Release:	%mkrel 0.%{rev}.2
 Group:		System/Servers
 License:	MIT
 URL:		http://www.butterfat.net/wiki/Projects/ModAuthOpenID
@@ -32,7 +32,7 @@ BuildRequires:	konforka-devel >= 0.0.1
 BuildRequires:	pcre++-devel >= 0.9.5
 BuildRequires:	opkele-devel >= 0.1
 BuildRequires:	db4-devel
-BuildRequires:	pqxx-devel
+BuildRequires:	libpqxx-devel
 BuildRequires:	curl-devel
 BuildRequires:	pcre-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
