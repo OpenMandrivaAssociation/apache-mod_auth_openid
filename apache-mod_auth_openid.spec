@@ -1,4 +1,4 @@
-%define rev r82
+%define rev r87
 
 #Module-Specific definitions
 %define mod_name mod_auth_openid
@@ -7,15 +7,14 @@
 
 Summary:	An OpenID authentication module for Apache 2
 Name:		apache-%{mod_name}
-Version:	0.1
-Release:	%mkrel 0.%{rev}.2
+Version:	0.2
+Release:	%mkrel 0.%{rev}.1
 Group:		System/Servers
 License:	MIT
 URL:		http://www.butterfat.net/wiki/Projects/ModAuthOpenID
 Source0:	%{mod_name}-%{version}-%{rev}.tar.gz
 Source1:	%{mod_conf}
 Patch0:		mod_auth_openid-dbdir.diff
-Patch1:		mod_auth_openid-libpcre++_fix.diff
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
 Requires(pre):	apache-conf >= 2.2.0
@@ -29,10 +28,8 @@ BuildRequires:	autoconf2.5
 BuildRequires:	automake1.8
 BuildRequires:	libtool
 BuildRequires:	konforka-devel >= 0.0.1
-BuildRequires:	pcre++-devel >= 0.9.5
-BuildRequires:	opkele-devel >= 0.1
+BuildRequires:	opkele-devel >= 0.3
 BuildRequires:	db4-devel
-BuildRequires:	libpqxx-devel
 BuildRequires:	curl-devel
 BuildRequires:	pcre-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -49,7 +46,6 @@ number of other options.
 
 %setup -q -n %{mod_name}
 %patch0 -p0
-%patch1 -p1
 
 cp %{SOURCE1} %{mod_conf}
 
