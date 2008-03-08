@@ -1,4 +1,4 @@
-%define rev r87
+%define rev r90
 
 #Module-Specific definitions
 %define mod_name mod_auth_openid
@@ -28,7 +28,7 @@ BuildRequires:	autoconf2.5
 BuildRequires:	automake1.8
 BuildRequires:	libtool
 BuildRequires:	konforka-devel >= 0.0.1
-BuildRequires:	opkele-devel >= 0.3
+BuildRequires:	opkele-devel >= 0.3.2
 BuildRequires:	db4-devel
 BuildRequires:	curl-devel
 BuildRequires:	pcre-devel
