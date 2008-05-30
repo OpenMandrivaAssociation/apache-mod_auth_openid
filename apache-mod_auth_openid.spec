@@ -1,5 +1,3 @@
-%define rev r90
-
 #Module-Specific definitions
 %define mod_name mod_auth_openid
 %define mod_conf A88_%{mod_name}.conf
@@ -7,12 +5,12 @@
 
 Summary:	An OpenID authentication module for Apache 2
 Name:		apache-%{mod_name}
-Version:	0.2
-Release:	%mkrel 0.%{rev}.1
+Version:	0.2.1
+Release:	%mkrel 1
 Group:		System/Servers
 License:	MIT
 URL:		http://www.butterfat.net/wiki/Projects/ModAuthOpenID
-Source0:	%{mod_name}-%{version}-%{rev}.tar.gz
+Source0:	%{mod_name}-%{version}.tar.gz
 Source1:	%{mod_conf}
 Patch0:		mod_auth_openid-dbdir.diff
 Requires(pre): rpm-helper
@@ -44,7 +42,7 @@ number of other options.
 
 %prep
 
-%setup -q -n %{mod_name}
+%setup -q -n %{mod_name}-%{version}
 %patch0 -p0
 
 cp %{SOURCE1} %{mod_conf}
