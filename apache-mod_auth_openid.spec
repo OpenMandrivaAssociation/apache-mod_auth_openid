@@ -69,7 +69,7 @@ libtoolize --copy --force; aclocal -I acinclude.d; autoheader; automake --add-mi
 install -d %{buildroot}%{_sysconfdir}/httpd/modules.d
 install -d %{buildroot}%{_libdir}/apache-extramodules
 install -d %{buildroot}%{_sbindir}
-install -d %{buildroot}%{_localstatedir}/%{mod_name}
+install -d %{buildroot}%{_localstatedir}/lib/%{mod_name}
 
 install -m0755 .libs/*.so %{buildroot}%{_libdir}/apache-extramodules/
 install -m0644 %{mod_conf} %{buildroot}%{_sysconfdir}/httpd/modules.d/%{mod_conf}
@@ -96,4 +96,4 @@ fi
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/httpd/modules.d/%{mod_conf}
 %attr(0755,root,root) %{_libdir}/apache-extramodules/%{mod_so}
 %attr(0755,root,root) %{_sbindir}/%{mod_name}-db_info
-%attr(0755,apache,apache) %dir %{_localstatedir}/%{mod_name}
+%attr(0755,apache,apache) %dir %{_localstatedir}/lib/%{mod_name}
