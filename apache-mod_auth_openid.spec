@@ -6,7 +6,7 @@
 Summary:	An OpenID authentication module for Apache 2
 Name:		apache-%{mod_name}
 Version:	0.2.1
-Release:	%mkrel 2
+Release:	%mkrel 3
 Group:		System/Servers
 License:	MIT
 URL:		http://www.butterfat.net/wiki/Projects/ModAuthOpenID
@@ -26,7 +26,7 @@ BuildRequires:	autoconf2.5
 BuildRequires:	automake1.8
 BuildRequires:	libtool
 BuildRequires:	konforka-devel >= 0.0.1
-BuildRequires:	opkele-devel >= 0.3.2
+BuildRequires:	opkele0.3-devel >= 0.3.2
 BuildRequires:	db4-devel
 BuildRequires:	curl-devel
 BuildRequires:	pcre-devel
@@ -64,7 +64,7 @@ libtoolize --copy --force; aclocal -I acinclude.d; autoheader; automake --add-mi
 %make
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 install -d %{buildroot}%{_sysconfdir}/httpd/modules.d
 install -d %{buildroot}%{_libdir}/apache-extramodules
@@ -88,7 +88,7 @@ if [ "$1" = "0" ]; then
 fi
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
