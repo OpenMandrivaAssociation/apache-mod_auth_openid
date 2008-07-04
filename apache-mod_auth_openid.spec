@@ -5,8 +5,8 @@
 
 Summary:	An OpenID authentication module for Apache 2
 Name:		apache-%{mod_name}
-Version:	0.2.1
-Release:	%mkrel 3
+Version:	0.3
+Release:	%mkrel 1
 Group:		System/Servers
 License:	MIT
 URL:		http://www.butterfat.net/wiki/Projects/ModAuthOpenID
@@ -26,8 +26,8 @@ BuildRequires:	autoconf2.5
 BuildRequires:	automake1.8
 BuildRequires:	libtool
 BuildRequires:	konforka-devel >= 0.0.1
-BuildRequires:	opkele0.3-devel >= 0.3.2
-BuildRequires:	db4-devel
+BuildRequires:	opkele-devel >= 2.0
+BuildRequires:	sqlite3-devel >= 3.3.0
 BuildRequires:	curl-devel
 BuildRequires:	pcre-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -47,9 +47,6 @@ number of other options.
 
 cp %{SOURCE1} %{mod_conf}
 
-# bdb header hack
-perl -pi -e "s|db_cxx\.h|db4/db_cxx\.h|g" configure* *.h acinclude.d/ax_path_bdb.m4 storage/storage.h
-
 %build
 %serverbuild
 
@@ -59,7 +56,8 @@ libtoolize --copy --force; aclocal -I acinclude.d; autoheader; automake --add-mi
 %configure2_5x --localstatedir=/var/lib \
     --with-apxs=%{_sbindir}/apxs \
     --with-apr-config=%{_bindir}/apr-1-config \
-    --with-bdb-dir=%{_prefix}
+    --with-sqlite3=%{_prefix} \
+    --with-pcre=%{_prefix}
 
 %make
 
@@ -92,7 +90,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING ChangeLog NEWS README TODO
+%doc AUTHORS COPYING ChangeLog NEWS README
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/httpd/modules.d/%{mod_conf}
 %attr(0755,root,root) %{_libdir}/apache-extramodules/%{mod_so}
 %attr(0755,root,root) %{_sbindir}/%{mod_name}-db_info
