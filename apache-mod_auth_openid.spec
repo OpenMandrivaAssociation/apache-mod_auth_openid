@@ -6,14 +6,15 @@
 Summary:	An OpenID authentication module for Apache 2
 Name:		apache-%{mod_name}
 Version:	0.4
-Release:	%mkrel 1
+Release:	%mkrel 2
 Group:		System/Servers
 License:	MIT
-URL:		http://www.butterfat.net/wiki/Projects/ModAuthOpenID
+URL:		http://trac.butterfat.net/public/mod_auth_openid
 Source0:	%{mod_name}-%{version}.tar.gz
 Source1:	%{mod_conf}
 Patch0:		mod_auth_openid-dbdir.diff
 Patch1:		mod_auth_openid-0.3-format_not_a_string_literal_and_no_format_arguments.diff
+Patch2:		mod_auth_openid-0.4-fix-linkage.patch
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
 Requires(pre):	apache-conf >= 2.2.0
@@ -42,20 +43,18 @@ identity. You can configure trusted/untrusted identity providers along with a
 number of other options.
 
 %prep
-
 %setup -q -n %{mod_name}-%{version}
 %patch0 -p0
 %patch1 -p0
+%patch2 -p0 -b .linkage
 
 cp %{SOURCE1} %{mod_conf}
 
 %build
 %serverbuild
-
-rm -rf configure autom4te.cache
-libtoolize --copy --force; aclocal -I acinclude.d; autoheader; automake --add-missing --copy; autoconf
-
-%configure2_5x --localstatedir=/var/lib \
+autoreconf -fi
+%configure2_5x --disable-static \
+    --localstatedir=/var/lib \
     --with-apxs=%{_sbindir}/apxs \
     --with-apr-config=%{_bindir}/apr-1-config \
     --with-sqlite3=%{_prefix} \
