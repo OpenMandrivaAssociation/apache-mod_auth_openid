@@ -5,16 +5,15 @@
 
 Summary:	An OpenID authentication module for Apache 2
 Name:		apache-%{mod_name}
-Version:	0.4
-Release:	%mkrel 4
+Version:	0.5
+Release:	%mkrel 1
 Group:		System/Servers
 License:	MIT
 URL:		http://trac.butterfat.net/public/mod_auth_openid
 Source0:	%{mod_name}-%{version}.tar.gz
 Source1:	%{mod_conf}
 Patch0:		mod_auth_openid-dbdir.diff
-Patch1:		mod_auth_openid-0.3-format_not_a_string_literal_and_no_format_arguments.diff
-Patch2:		mod_auth_openid-0.4-fix-linkage.patch
+Patch1:		mod_auth_openid-0.4-fix-linkage.patch
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
 Requires(pre):	apache-conf >= 2.2.0
@@ -45,8 +44,7 @@ number of other options.
 %prep
 %setup -q -n %{mod_name}-%{version}
 %patch0 -p0
-%patch1 -p0
-%patch2 -p0 -b .linkage
+%patch1 -p0 -b .linkage
 
 cp %{SOURCE1} %{mod_conf}
 
