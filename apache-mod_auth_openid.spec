@@ -6,7 +6,7 @@
 Summary:	An OpenID authentication module for Apache 2
 Name:		apache-%{mod_name}
 Version:	0.5
-Release:	%mkrel 1
+Release:	%mkrel 2
 Group:		System/Servers
 License:	MIT
 URL:		http://trac.butterfat.net/public/mod_auth_openid
