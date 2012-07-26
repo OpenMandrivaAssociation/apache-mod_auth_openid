@@ -9,8 +9,8 @@ Version:	0.7
 Release:	1
 Group:		System/Servers
 License:	MIT
-URL:		http://trac.butterfat.net/public/mod_auth_openid
-Source0:	%{mod_name}-%{version}.tar.gz
+URL:		http://findingscience.com/mod_auth_openid/
+Source0:	https://github.com/downloads/bmuller/mod_auth_openid/%{mod_name}-%{version}.tar.gz
 Source1:	%{mod_conf}
 Patch0:		mod_auth_openid-dbdir.diff
 Patch1:		mod_auth_openid-fix-linkage.diff
