@@ -1,0 +1,11 @@
+--- src/mod_auth_openid.cpp	2012-05-22 15:33:36.000000000 +0200
++++ src/mod_auth_openid.cpp.oden	2012-07-26 13:45:18.000000000 +0200
+@@ -62,7 +62,7 @@ typedef const char *(*CMD_HAND_TYPE) ();
+ static void *create_modauthopenid_config(apr_pool_t *p, char *s) {
+   modauthopenid_config *newcfg;
+   newcfg = (modauthopenid_config *) apr_pcalloc(p, sizeof(modauthopenid_config));
+-  newcfg->db_location = "/tmp/mod_auth_openid.db";
++  newcfg->db_location = "/var/lib/mod_auth_openid/mod_auth_openid.db";
+   newcfg->use_cookie = true;
+   newcfg->cookie_name = "open_id_session_id";
+   newcfg->cookie_path = NULL; 

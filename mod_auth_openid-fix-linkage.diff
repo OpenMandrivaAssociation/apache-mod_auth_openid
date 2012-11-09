@@ -1,0 +1,28 @@
+--- src/Makefile.am	2012-05-22 15:33:36.000000000 +0200
++++ src/Makefile.am.oden	2012-07-26 13:48:59.000000000 +0200
+@@ -3,14 +3,15 @@
+ noinst_DATA = mod_auth_openid.la
+ 
+ INCLUDES = ${APACHE_CFLAGS} ${OPKELE_CFLAGS} ${SQLITE3_CFLAGS} ${PCRE_CFLAGS} ${CURL_CFLAGS}
+-AM_LDFLAGS = ${OPKELE_LIBS} ${SQLITE3_LDFLAGS} ${PCRE_LIBS} ${CURL_LIBS} ${APR_LDFLAGS}
+ 
+ libmodauthopenid_la_SOURCES = mod_auth_openid.cpp MoidConsumer.cpp moid_utils.cpp http_helpers.cpp \
+ 	SessionManager.cpp config.h  http_helpers.h  mod_auth_openid.h  MoidConsumer.h  moid_utils.h \
+ 	SessionManager.h  types.h
+ 
++libmodauthopenid_la_LIBADD = ${OPKELE_LIBS} ${SQLITE3_LDFLAGS} ${PCRE_LIBS} ${CURL_LIBS} ${APR_LDFLAGS}
++
+ db_info_SOURCES = db_info.cpp
+-db_info_LDFLAGS = -lmodauthopenid
++db_info_LDADD = libmodauthopenid.la $(libmodauthopenid_la_LIBADD)
+ db_info_DEPENDENCIES = libmodauthopenid.la
+ 
+ AM_CXXFLAGS = -Wall
+@@ -28,5 +29,5 @@
+ 	${APXS} -i -a -n 'authopenid' mod_auth_openid.la
+ 
+ mod_auth_openid.la: libmodauthopenid.la
+-	${APXS} -c -o $@ $< ${APACHE_CFLAGS} ${OPKELE_CFLAGS} ${OPKELE_LIBS} \
+-			    ${SQLITE3_CFLAGS} ${PCRE_LIBS} ${CURL_LIBS}
++	${APXS} -c -o $@ $< ${APACHE_CFLAGS} ${OPKELE_CFLAGS} $(LDFLAGS) ${OPKELE_LIBS} \
++			    ${SQLITE3_CFLAGS} ${PCRE_LIBS} ${CURL_LIBS} `pkg-config --libs apr-util-1 apr-1`
