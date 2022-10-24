@@ -1,3 +1,2 @@
 sources:
-  "A88_mod_auth_openid.conf:"	55b35ee286003ea512e6da585512f74dacc60f65
-  "mod_auth_openid-0.7.tar.gz:"	2ebf6e446aedefc5c2a4523ab05c359a1dcf6f25
+  mod_auth_openid-0.8.tar.gz: 35251bfaf50eeb18a15c9712ebc0de7d8120aac6

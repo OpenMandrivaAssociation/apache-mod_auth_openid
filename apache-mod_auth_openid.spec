@@ -5,12 +5,12 @@
 
 Summary:	An OpenID authentication module for Apache 2
 Name:		apache-%{mod_name}
-Version:	0.7
+Version:	0.8
 Release:	1
 Group:		System/Servers
 License:	MIT
 URL:		http://findingscience.com/mod_auth_openid/
-Source0:	https://github.com/downloads/bmuller/mod_auth_openid/%{mod_name}-%{version}.tar.gz
+Source0:	https://github.com/bmuller/mod_auth_openid/releases/download/v%{version}/mod_auth_openid-%{version}.tar.gz
 Source1:	%{mod_conf}
 Patch0:		mod_auth_openid-dbdir.diff
 Patch1:		mod_auth_openid-fix-linkage.diff
@@ -19,7 +19,7 @@ Requires(postun): rpm-helper
 Requires(pre):	apache >= 2.2.0
 Requires:	apache >= 2.2.0
 BuildRequires:	apache-devel >= 2.2.0
-BuildRequires:	apache-mpm-prefork >= 2.2.0
+BuildRequires:	apache-mpm-event >= 2.2.0
 BuildRequires:	pkgconfig
 BuildRequires:	autoconf automake libtool
 BuildRequires:	konforka-devel >= 0.0.1
@@ -37,27 +37,22 @@ identity. You can configure trusted/untrusted identity providers along with a
 number of other options.
 
 %prep
-%setup -q -n %{mod_name}-%{version}
-%patch0 -p0
-%patch1 -p0 -b .linkage
-
-cp %{SOURCE1} %{mod_conf}
+%autosetup -p0 -n %{mod_name}-%{version}
+sed -e 's,@LIBDIR@,%{_libdir},g' %{SOURCE1} >%{mod_conf}
 
 %build
 %serverbuild
 autoreconf -fi
-%configure2_5x --disable-static \
+%configure --disable-static \
     --localstatedir=/var/lib \
     --with-apxs=%{_bindir}/apxs \
     --with-apr-config=%{_bindir}/apr-1-config \
     --with-sqlite3=%{_prefix} \
     --with-pcre=%{_prefix}
 
-%make
+%make SQLITE3_LDFLAGS='-lsqlite3'
 
 %install
-rm -rf %{buildroot}
-
 install -d %{buildroot}%{_sysconfdir}/httpd/modules.d
 install -d %{buildroot}%{_libdir}/apache
 install -d %{buildroot}%{_sbindir}
