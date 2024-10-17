@@ -9,7 +9,7 @@ Version:	0.8
 Release:	1
 Group:		System/Servers
 License:	MIT
-URL:		http://findingscience.com/mod_auth_openid/
+URL:		https://findingscience.com/mod_auth_openid/
 Source0:	https://github.com/bmuller/mod_auth_openid/releases/download/v%{version}/mod_auth_openid-%{version}.tar.gz
 Source1:	%{mod_conf}
 Patch0:		mod_auth_openid-dbdir.diff
